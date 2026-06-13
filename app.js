@@ -81,6 +81,26 @@ function getPossibleWordsForLetters(letters) {
   if (normalized.length !== 3) return [];
   return state.words.filter(w => orderedMatch(w, normalized));
 }
+function lookupPlate() {
+  const letters = normalizeWord(el.lookupInput.value);
+  if (letters.length !== 3) {
+    el.lookupResult.textContent = "Enter exactly 3 letters.";
+    return;
+  }
+
+  const possible = getPossibleWordsForLetters(letters);
+
+  if (possible.length === 0) {
+    el.lookupResult.textContent = `No words can be formed from "${letters.toUpperCase()}".`;
+    return;
+  }
+
+  el.lookupResult.textContent = `Words CAN be formed from "${letters.toUpperCase()}". (${possible.length} found)`;
+
+  // Update state + draw plate
+  state.letters = letters.toUpperCase();
+  renderPlateWithLetters(state.letters);
+}
 
 function refreshSubmitted() {
   el.submittedWords.innerHTML = '';
@@ -154,5 +174,6 @@ document.getElementById('submitBtn').onclick = submitWord;
 document.getElementById('answerBtn').onclick = showAnswers;
 document.getElementById('randomBtn').onclick = generateLetters;
 document.getElementById('clearBtn').onclick = clearApp;
+document.getElementById('lookupBtn').onclick = lookupPlate;
 
 loadAssets();
