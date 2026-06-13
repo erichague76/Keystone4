@@ -9,10 +9,10 @@ const state = {
   plateImageLoaded: false,
   plateImage: null,
   plateTextColor: '#14377D',
-  manualFontSize: 100,
+  manualFontSize: 125,
   manualLetterSpacingPx: -15,
   manualOffsetX: 20,
-  manualOffsetY: 50
+  manualOffsetY: 75
 };
 
 const el = {
