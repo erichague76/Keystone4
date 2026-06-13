@@ -12,7 +12,7 @@ const state = {
   manualFontSize: 135,
   manualLetterSpacingPx: -15,
   manualOffsetX: 20,
-  manualOffsetY: 65
+  manualOffsetY: 6o
 };
 
 const el = {
