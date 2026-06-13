@@ -9,7 +9,7 @@ const state = {
   plateImageLoaded: false,
   plateImage: null,
   plateTextColor: '#14377D',
-  manualFontSize: 150,
+  manualFontSize: 100,
   manualLetterSpacingPx: -15,
   manualOffsetX: 20,
   manualOffsetY: 50
