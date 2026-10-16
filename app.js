@@ -133,11 +133,12 @@ function submitWord() {
 
 function showAnswers() {
   const letters = state.letters;
-  const possible = getPossibleWordsForLetters(letters);
+
+  const possible = getPossibleWordsForLetters(letters)
+    .sort((a, b) => b.length - a.length || a.localeCompare(b));
 
   el.resultsText.innerHTML = possible.join(' ');
 }
-
 function generateLetters() {
   const letters = generateRandomLetters();
   state.letters = letters;
