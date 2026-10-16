@@ -157,6 +157,7 @@ function showAnswers() {
     });
 
   el.resultsText.innerHTML = output;
+
 }
 function generateLetters() {
   const letters = generateRandomLetters();
