@@ -134,10 +134,29 @@ function submitWord() {
 function showAnswers() {
   const letters = state.letters;
 
-  const possible = getPossibleWordsForLetters(letters)
-    .sort((a, b) => b.length - a.length || a.localeCompare(b));
+  const possible = getPossibleWordsForLetters(letters);
 
-  el.resultsText.innerHTML = possible.join(' ');
+  // Sort longest to shortest, then alphabetically
+  possible.sort((a, b) => b.length - a.length || a.localeCompare(b));
+
+  const groups = {};
+
+  possible.forEach(word => {
+    const len = word.length;
+    if (!groups[len]) groups[len] = [];
+    groups[len].push(word);
+  });
+
+  let output = '';
+
+  Object.keys(groups)
+    .sort((a, b) => b - a)   // longest groups first
+    .forEach(len => {
+      output += `\n${len} LETTER WORDS (${groups[len].length})\n`;
+      output += `${groups[len].join(' ')}\n`;
+    });
+
+  el.resultsText.innerHTML = output;
 }
 function generateLetters() {
   const letters = generateRandomLetters();
