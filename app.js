@@ -143,20 +143,25 @@ function showAnswers() {
 
   possible.forEach(word => {
     const len = word.length;
+
+    // Only keep 6, 7, and 8 letter words
+    if (len < 6 || len > 8) return;
+
     if (!groups[len]) groups[len] = [];
     groups[len].push(word);
   });
 
   let output = '';
 
-  Object.keys(groups)
-    .sort((a, b) => b - a)   // longest groups first
-    .forEach(len => {
+  [8, 7, 6].forEach(len => {
+    if (groups[len] && groups[len].length) {
       output += `\n${len} LETTER WORDS (${groups[len].length})\n`;
       output += `${groups[len].join(' ')}\n`;
-    });
+    }
+  });
 
   el.resultsText.innerHTML = output;
+}
 
 }
 function generateLetters() {
