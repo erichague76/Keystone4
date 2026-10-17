@@ -112,7 +112,7 @@ function lookupPlate() {
 
   // Build counts message for 6/7/8 letter words
   const { counts, total } = count6to8Message(letters);
-  const msg = `Words CAN be formed from "${letters.toUpperCase()}". 6-letter: ${counts[6]}, 7-letter: ${counts[7]}, 8-letter: ${counts[8]} (Total: ${total}, All lengths found: ${possible.length}).`;
+  const msg = `Words CAN be formed from "${letters.toUpperCase()}". 6-letter: ${counts[6]}, 7-letter: ${counts[7]}, 8-letter: ${counts[8]} (Total: ${total}, All lengths found: ${possible.length})[...]`;
 
   el.lookupResult.textContent = msg;
   el.status.textContent = msg;
@@ -188,8 +188,8 @@ function generateLetters() {
   renderPlateWithLetters(letters);
 
   // After generating letters, show counts for 6/7/8 letter words
-  const { counts, total, possible } count6to8Message(letters);
-  const msg = (Total: ${total}, words found: ${possible.length})`Random plate "${letters}" generated. 6-letter: ${counts[6]}, 7-letter: ${counts[7]}, 8-letter: ${counts[8]} .`;
+  const { counts, total, possible } = count6to8Message(letters);
+  const msg = `Random plate "${letters}" generated. 6-letter: ${counts[6]}, 7-letter: ${counts[7]}, 8-letter: ${counts[8]} (Total: ${total}, All lengths found: ${possible.length}).`;
   el.status.textContent = msg;
   el.lookupResult.textContent = msg;
 }
