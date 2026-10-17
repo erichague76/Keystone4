@@ -136,12 +136,15 @@ function showAnswers() {
 
   const possible = getPossibleWordsForLetters(letters);
 
+  // Filter to only show answers with 6, 7, or 8 letters
+  const filteredPossible = possible.filter(w => w.length >= 6 && w.length <= 8);
+
   // Sort longest to shortest, then alphabetically
-  possible.sort((a, b) => b.length - a.length || a.localeCompare(b));
+  filteredPossible.sort((a, b) => b.length - a.length || a.localeCompare(b));
 
   const groups = {};
 
-  possible.forEach(word => {
+  filteredPossible.forEach(word => {
     const len = word.length;
     if (!groups[len]) groups[len] = [];
     groups[len].push(word);
