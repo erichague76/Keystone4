@@ -189,7 +189,7 @@ function generateLetters() {
 
   // After generating letters, show counts for 6/7/8 letter words
   const { counts, total, possible } = count6to8Message(letters);
-  const msg = `Random plate "${letters}" generated. 6-letter: ${counts[6]}, 7-letter: ${counts[7]}, 8-letter: ${counts[8]} (Total: ${total}, All lengths found: ${possible.length}).`;
+  const msg = `Random plate "${letters}" generated. 6 letter: ${counts[6]}, 7-letter: ${counts[7]}, 8-letter: ${counts[8]} (Total: ${total}, All lengths found: ${possible.length}).`;
   el.status.textContent = msg;
   el.lookupResult.textContent = msg;
 }
