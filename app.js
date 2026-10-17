@@ -81,10 +81,11 @@ function getPossibleWordsForLetters(letters) {
   if (normalized.length !== 3) return [];
   return state.words.filter(w => orderedMatch(w, normalized));
 }
+
 function lookupPlate() {
   const letters = normalizeWord(el.lookupInput.value);
   if (letters.length !== 3) {
-    el.lookupResult.textContent = "Enter exactly 3 letters.";
+    el.lookupResult.textContent = 'Enter exactly 3 letters.';
     return;
   }
 
@@ -95,14 +96,12 @@ function lookupPlate() {
     return;
   }
 
-  // Count 6,7,8 letter words (in-order match already handled by getPossibleWordsForLetters)
   const count6 = possible.filter(w => w.length === 6).length;
   const count7 = possible.filter(w => w.length === 7).length;
   const count8 = possible.filter(w => w.length === 8).length;
 
-  el.lookupResult.textContent = `From "${letters.toUpperCase()}": 6-letter: ${count6}, 7-letter: ${count7}, 8-letter: ${count8}  (total ${possible.length})`;
+  el.lookupResult.textContent = `From "${letters.toUpperCase()}": 6-letter: ${count6}, 7-letter: ${count7}, 8-letter: ${count8} (total ${possible.length})`;
 
-  // Update state + draw plate
   state.letters = letters.toUpperCase();
   renderPlateWithLetters(state.letters);
 }
@@ -141,10 +140,8 @@ function showAnswers() {
 
   const possible = getPossibleWordsForLetters(letters);
 
-  // Filter to only show answers with 6, 7, or 8 letters
   const filteredPossible = possible.filter(w => w.length >= 6 && w.length <= 8);
 
-  // Sort shortest to longest, then alphabetically within each length
   filteredPossible.sort((a, b) => a.length - b.length || a.localeCompare(b));
 
   const groups = {};
@@ -159,15 +156,15 @@ function showAnswers() {
 
   Object.keys(groups)
     .map(Number)
-    .sort((a, b) => a - b)   // shortest groups first (6,7,8)
+    .sort((a, b) => a - b)
     .forEach(len => {
       output += `\n${len} LETTER WORDS (${groups[len].length})\n`;
       output += `${groups[len].join(' ')}\n`;
     });
 
   el.resultsText.innerHTML = output;
-
 }
+
 function generateLetters() {
   const letters = generateRandomLetters();
   state.letters = letters;
@@ -181,7 +178,6 @@ function clearApp() {
 }
 
 async function loadAssets() {
-  // Load words
   try {
     const res = await fetch(WORDLIST_FILE);
     const text = await res.text();
@@ -190,7 +186,6 @@ async function loadAssets() {
     state.words = [];
   }
 
-  // Load image
   const img = new Image();
   img.src = PLATE_IMAGE_FILE;
   img.onload = () => {
