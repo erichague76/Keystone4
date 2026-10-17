@@ -81,6 +81,20 @@ function getPossibleWordsForLetters(letters) {
   if (normalized.length !== 3) return [];
   return state.words.filter(w => orderedMatch(w, normalized));
 }
+
+// New helper: count words of specific lengths (6,7,8) and return a message
+function count6to8Message(letters) {
+  const possible = getPossibleWordsForLetters(letters);
+  const counts = {6: 0, 7: 0, 8: 0};
+  possible.forEach(w => {
+    if (w.length === 6) counts[6] += 1;
+    if (w.length === 7) counts[7] += 1;
+    if (w.length === 8) counts[8] += 1;
+  });
+  const total = counts[6] + counts[7] + counts[8];
+  return { counts, total, possible };
+}
+
 function lookupPlate() {
   const letters = normalizeWord(el.lookupInput.value);
   if (letters.length !== 3) {
@@ -92,10 +106,16 @@ function lookupPlate() {
 
   if (possible.length === 0) {
     el.lookupResult.textContent = `No words can be formed from "${letters.toUpperCase()}".`;
+    el.status.textContent = '';
     return;
   }
 
-  el.lookupResult.textContent = `Words CAN be formed from "${letters.toUpperCase()}". (${possible.length} found)`;
+  // Build counts message for 6/7/8 letter words
+  const { counts, total } = count6to8Message(letters);
+  const msg = `Words CAN be formed from "${letters.toUpperCase()}". 6-letter: ${counts[6]}, 7-letter: ${counts[7]}, 8-letter: ${counts[8]} (Total: ${total}, All lengths found: ${possible.length}).`;
+
+  el.lookupResult.textContent = msg;
+  el.status.textContent = msg;
 
   // Update state + draw plate
   state.letters = letters.toUpperCase();
@@ -166,6 +186,12 @@ function generateLetters() {
   const letters = generateRandomLetters();
   state.letters = letters;
   renderPlateWithLetters(letters);
+
+  // After generating letters, show counts for 6/7/8 letter words
+  const { counts, total, possible } = count6to8Message(letters);
+  const msg = `Random plate "${letters}" generated. 6-letter: ${counts[6]}, 7-letter: ${counts[7]}, 8-letter: ${counts[8]} (Total: ${total}, All lengths found: ${possible.length}).`;
+  el.status.textContent = msg;
+  el.lookupResult.textContent = msg;
 }
 
 function clearApp() {
