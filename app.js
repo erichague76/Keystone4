@@ -95,7 +95,12 @@ function lookupPlate() {
     return;
   }
 
-  el.lookupResult.textContent = `Words CAN be formed from "${letters.toUpperCase()}". (${possible.length} found)`;
+  // Count 6,7,8 letter words (in-order match already handled by getPossibleWordsForLetters)
+  const count6 = possible.filter(w => w.length === 6).length;
+  const count7 = possible.filter(w => w.length === 7).length;
+  const count8 = possible.filter(w => w.length === 8).length;
+
+  el.lookupResult.textContent = `From "${letters.toUpperCase()}": 6-letter: ${count6}, 7-letter: ${count7}, 8-letter: ${count8}  (total ${possible.length})`;
 
   // Update state + draw plate
   state.letters = letters.toUpperCase();
@@ -139,8 +144,8 @@ function showAnswers() {
   // Filter to only show answers with 6, 7, or 8 letters
   const filteredPossible = possible.filter(w => w.length >= 6 && w.length <= 8);
 
-  // Sort longest to shortest, then alphabetically
-  filteredPossible.sort((a, b) => b.length - a.length || a.localeCompare(b));
+  // Sort shortest to longest, then alphabetically within each length
+  filteredPossible.sort((a, b) => a.length - b.length || a.localeCompare(b));
 
   const groups = {};
 
@@ -153,7 +158,8 @@ function showAnswers() {
   let output = '';
 
   Object.keys(groups)
-    .sort((a, b) => b - a)   // longest groups first
+    .map(Number)
+    .sort((a, b) => a - b)   // shortest groups first (6,7,8)
     .forEach(len => {
       output += `\n${len} LETTER WORDS (${groups[len].length})\n`;
       output += `${groups[len].join(' ')}\n`;
