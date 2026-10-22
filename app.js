@@ -156,11 +156,14 @@ function showAnswers() {
 
   const possible = getPossibleWordsForLetters(letters);
 
-  // Filter to only show answers with 6, 7, or 8 letters
-  const sixToEight = possible.filter(w => w.length >= 6 && w.length <= 8);
+  if (possible.length === 0) {
+    el.resultsText.innerHTML = '';
+    return;
+  }
 
-  // Longest valid words above 8 letters are grouped separately
-  const longest = possible.filter(w => w.length > 8);
+  const sixToEight = possible.filter(w => w.length >= 6 && w.length <= 8);
+  const longestLength = Math.max(...possible.map(w => w.length));
+  const longestWords = possible.filter(w => w.length === longestLength);
 
   const groups = {
     6: [],
@@ -182,9 +185,7 @@ function showAnswers() {
       output += `${groups[len].join(' ')}\n`;
     });
 
-  if (longest.length > 0) {
-    const longestLength = Math.max(...longest.map(w => w.length));
-    const longestWords = longest.filter(w => w.length === longestLength);
+  if (longestWords.length > 0) {
     output += `\nLONGEST WORDS (${longestLength} LETTERS)\n`;
     output += `${longestWords.join(' ')}\n`;
   }
