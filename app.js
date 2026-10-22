@@ -173,7 +173,7 @@ function showAnswers() {
   let output = '';
 
   Object.keys(groups)
-    .sort((b, a) => a - b)   // longest groups first
+    .sort((a, b) => a - b)   // shortest groups first
     .forEach(len => {
       output += `\n${len} LETTER WORDS (${groups[len].length})\n`;
       output += `${groups[len].join(' ')}\n`;
