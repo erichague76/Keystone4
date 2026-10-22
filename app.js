@@ -157,39 +157,37 @@ function showAnswers() {
   const possible = getPossibleWordsForLetters(letters);
 
   // Filter to only show answers with 6, 7, or 8 letters
-  const filteredPossible = possible.filter(w => w.length >= 6 && w.length <= 8);
+  const sixToEight = possible.filter(w => w.length >= 6 && w.length <= 8);
 
-  if (filteredPossible.length === 0) {
-    el.resultsText.innerHTML = '';
-    return;
-  }
+  // Longest valid words above 8 letters are grouped separately
+  const longest = possible.filter(w => w.length > 8);
 
-  // Sort longest to shortest, then alphabetically
-  filteredPossible.sort((a, b) => b.length - a.length || a.localeCompare(b));
+  const groups = {
+    6: [],
+    7: [],
+    8: []
+  };
 
-  const longestLength = filteredPossible[0].length;
-  const longestWords = filteredPossible.filter(w => w.length === longestLength);
-
-  const groups = {};
-
-  filteredPossible.forEach(word => {
+  sixToEight.forEach(word => {
     const len = word.length;
-    if (len === longestLength) return;
-    if (!groups[len]) groups[len] = [];
-    groups[len].push(word);
+    if (groups[len]) groups[len].push(word);
   });
 
   let output = '';
 
-  output += `\nLONGEST WORD${longestWords.length > 1 ? 'S' : ''} (${longestLength} LETTERS)\n`;
-  output += `${longestWords.join(' ')}\n`;
-
   Object.keys(groups)
-    .sort((a, b) => a - b) // shortest groups first
+    .sort((a, b) => a - b)
     .forEach(len => {
       output += `\n${len} LETTER WORDS (${groups[len].length})\n`;
       output += `${groups[len].join(' ')}\n`;
     });
+
+  if (longest.length > 0) {
+    const longestLength = Math.max(...longest.map(w => w.length));
+    const longestWords = longest.filter(w => w.length === longestLength);
+    output += `\nLONGEST WORDS (${longestLength} LETTERS)\n`;
+    output += `${longestWords.join(' ')}\n`;
+  }
 
   el.resultsText.innerHTML = output;
 }
