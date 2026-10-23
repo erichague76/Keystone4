@@ -247,11 +247,14 @@ async function loadAssets() {
   };
 }
 
+const randomBtn = document.getElementById('randomBtn') || document.getElementById('currentLetters');
+if (randomBtn) {
+  randomBtn.onclick = generateLetters;
+}
+
 document.getElementById('submitBtn').onclick = submitWord;
 document.getElementById('answerBtn').onclick = showAnswers;
-document.getElementById('randomBtn').onclick = generateLetters;
 document.getElementById('clearBtn').onclick = clearApp;
 document.getElementById('lookupBtn').onclick = lookupPlate;
 
 loadAssets();
-
