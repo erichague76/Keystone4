@@ -206,7 +206,10 @@ function generateLetters() {
 
   // After generating letters, show counts for 6/7/8 letter words
   const { counts, total } = count6to8Message(letters);
-  const msg = `Letters "${letters}" Forms: "${counts[6]}" 6 Letter words,  "${counts[7]}" 7 Letter words, and "${counts[8]}" 8 Letter words (Total words: ${total}).`;
+  const msg = `Letters "${letters}" Forms: "${counts[6]}" 6 Letter words,\n
+  "${counts[7]}" 7 Letter words,\n
+  "${counts[8]}" 8 Letter words\n
+  (Total words: ${total}).`;
   el.status.textContent = msg;
   el.lookupResult.textContent = msg;
 }
