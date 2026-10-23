@@ -31,10 +31,6 @@
         <button id="submitBtn" class="btn btn-primary" type="button">Submit</button>
       </section>
 
-      <section class="button-row utility-row" aria-label="Utility actions">
-        <button id="clearBtn" class="btn btn-secondary" type="button">Clear</button>
-      </section>
-
       <section class="lookup-row" aria-label="3-letter lookup">
         <label class="section-label inline" for="lookupInput">3-Letter Plate Lookup:</label>
         <input id="lookupInput" type="text" maxlength="3" autocomplete="off" autocapitalize="characters" spellcheck="false" />
@@ -51,7 +47,10 @@
         </section>
 
         <section class="card results-card">
-          <button id="answerBtn" type="button" class="card-title-btn" data-action="answer">Answer</button>
+          <div class="results-actions">
+            <button id="answerBtn" type="button" class="btn btn-primary" data-action="answer">Answer</button>
+            <button id="clearBtn" class="btn btn-primary" type="button">Clear</button>
+          </div>
           <div id="resultsText" class="results-text" aria-live="polite"></div>
         </section>
       </section>
