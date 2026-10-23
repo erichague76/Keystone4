@@ -196,10 +196,13 @@ function showAnswers() {
 function generateLetters() {
   const letters = generateRandomLetters();
   state.letters = letters;
+  if (el.lookupInput) {
+    el.lookupInput.value = letters;
+  }
   renderPlateWithLetters(letters);
 
   // After generating letters, show counts for 6/7/8 letter words
-  const { counts, total, possible } = count6to8Message(letters);
+  const { counts, total } = count6to8Message(letters);
   const msg = `Letters "${letters}" Forms: "${counts[6]}" 6 Letter words,  "${counts[7]}" 7 Letter words, and "${counts[8]}" 8 Letter words (Total words: ${total}).`;
   el.status.textContent = msg;
   el.lookupResult.textContent = msg;
