@@ -26,8 +26,9 @@
       </section>
 
       <section class="input-row" aria-label="Word entry">
+        <label class="section-label" for="wordInput">Words formed</label>
+        <input id="wordInput" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" />
         <button id="submitBtn" class="btn btn-primary" type="button">Submit</button>
-        <input id="wordInput" class="hidden" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" />
       </section>
 
       <section class="button-row utility-row" aria-label="Utility actions">
@@ -50,7 +51,7 @@
         </section>
 
         <section class="card results-card">
-          <button type="button" class="card-title-btn" data-action="answer">Answer</button>
+          <button id="answerBtn" type="button" class="card-title-btn" data-action="answer">Answer</button>
           <div id="resultsText" class="results-text" aria-live="polite"></div>
         </section>
       </section>
