@@ -18,7 +18,7 @@
       </header>
 
       <section class="card preview-card" aria-label="Plate preview">
-        <div class="preview-center">
+        <div class="plate-panel">
           <canvas id="plateCanvas" width="1200" height="360" aria-label="License plate preview"></canvas>
           <div id="plateFallback" class="plate-fallback hidden">Plate image preview will appear here.</div>
           <button id="randomBtn" class="btn btn-secondary current-letters" type="button">Generate Random Plate</button>
@@ -26,13 +26,8 @@
       </section>
 
       <section class="input-row" aria-label="Word entry">
-        <label class="section-label" for="wordInput">Words you formed / input:</label>
-        <input id="wordInput" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" />
-      </section>
-
-      <section class="button-row" aria-label="Primary actions">
         <button id="submitBtn" class="btn btn-primary" type="button">Submit</button>
-        <button id="answerBtn" class="btn btn-primary" type="button">Answer</button>
+        <input id="wordInput" class="hidden" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" />
       </section>
 
       <section class="button-row utility-row" aria-label="Utility actions">
@@ -55,7 +50,7 @@
         </section>
 
         <section class="card results-card">
-          <div class="card-title">Answer List</div>
+          <button type="button" class="card-title-btn" data-action="answer">Answer</button>
           <div id="resultsText" class="results-text" aria-live="polite"></div>
         </section>
       </section>
