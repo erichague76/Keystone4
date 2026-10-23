@@ -73,7 +73,9 @@ function renderPlateWithLetters(letters) {
     x += ctx.measureText(ch).width + state.manualLetterSpacingPx;
   }
 
-  el.currentLetters.textContent = `Current letters: ${letters}`;
+  if (el.currentLetters) {
+    el.currentLetters.textContent = `Current letters: ${letters}`;
+  }
 }
 
 function getPossibleWordsForLetters(letters) {
@@ -147,6 +149,7 @@ function submitWord() {
     state.submittedWords.sort();
   }
 
+  el.summary.textContent = `"${word}" is valid`;
   refreshSubmitted();
   el.wordInput.value = '';
 }
@@ -210,7 +213,17 @@ function generateLetters() {
 
 function clearApp() {
   state.submittedWords = [];
+  state.letters = '';
+  state.currentPossibleWords = [];
+  el.wordInput.value = '';
+  el.lookupInput.value = '';
+  el.summary.textContent = 'Ready.';
+  el.lookupResult.textContent = 'Enter 3 letters to check whether words can be formed.';
+  el.status.textContent = '';
   el.resultsText.innerHTML = '';
+  if (el.currentLetters) {
+    el.currentLetters.textContent = 'Generate Random Plate';
+  }
   refreshSubmitted();
 }
 
@@ -241,3 +254,4 @@ document.getElementById('clearBtn').onclick = clearApp;
 document.getElementById('lookupBtn').onclick = lookupPlate;
 
 loadAssets();
+
