@@ -30,7 +30,7 @@ body {
 
 body {
   padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
-           env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+            env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
 }
 
 .app-shell {
@@ -133,6 +133,14 @@ h1 {
 
 .input-row {
   margin-top: 4px;
+}
+
+.input-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
 }
 
 input {
@@ -337,6 +345,10 @@ input:focus {
   .input-row,
   .lookup-row {
     flex-direction: column;
+  }
+
+  .input-panel {
+    padding: 12px 14px;
   }
 
   .lookup-row .section-label.inline,
