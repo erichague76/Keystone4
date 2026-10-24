@@ -276,6 +276,19 @@ input:focus {
   background: #f6f8fc;
 }
 
+.results-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 12px 12px;
+}
+
+.results-actions .btn {
+  width: 100%;
+  max-width: 220px;
+  align-self: center;
+}
+
 .results-text {
   padding: 12px;
   white-space: pre-wrap;
@@ -370,6 +383,10 @@ input:focus {
   .button-row .btn,
   .utility-row .btn {
     flex: 1 1 100%;
+  }
+
+  .results-actions .btn {
+    max-width: none;
   }
 
   .answers-grid {
