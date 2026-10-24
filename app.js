@@ -112,14 +112,21 @@ function lookupPlate() {
     return;
   }
 
-  // Build counts message for 6/7/8 letter words
   const { counts, total } = count6to8Message(letters);
-  const msg = `Words CAN be formed from "${letters.toUpperCase()}". 6-letter: ${counts[6]}, 7-letter: ${counts[7]}, 8-letter: ${counts[8]} (Total: ${total}, All lengths found: ${possible.length})`;
+  const msg = [
+    `Words CAN be formed from "${letters.toUpperCase()}"`,
+    `6-letter: ${counts[6]}`,
+    `7-letter: ${counts[7]}`,
+    `8-letter: ${counts[8]}`,
+    `Total: ${total}`,
+    `All lengths found: ${possible.length}`
+  ].join('\n');
 
   el.lookupResult.textContent = msg;
+  el.lookupResult.style.whiteSpace = 'pre-line';
   el.status.textContent = msg;
+  el.status.style.whiteSpace = 'pre-line';
 
-  // Update state + draw plate
   state.letters = letters.toUpperCase();
   renderPlateWithLetters(state.letters);
 }
@@ -204,21 +211,20 @@ function generateLetters() {
   }
   renderPlateWithLetters(letters);
 
-  // After generating letters, show counts for 6/7/8 letter words
   const { counts, total } = count6to8Message(letters);
-const msg = [
-  `Letters "${letters}"`,
-  `6-letter words: ${counts[6]}`,
-  `7-letter words: ${counts[7]}`,
-  `8-letter words: ${counts[8]}`,
-  `Total words: ${total}`
-].join('\n');
+  const msg = [
+    `Letters "${letters}"`,
+    `6-letter words: ${counts[6]}`,
+    `7-letter words: ${counts[7]}`,
+    `8-letter words: ${counts[8]}`,
+    `Total words: ${total}`
+  ].join('\n');
 
-el.status.textContent = msg;
-el.status.style.whiteSpace = 'pre-line';
+  el.status.textContent = msg;
+  el.status.style.whiteSpace = 'pre-line';
 
-el.lookupResult.textContent = msg;
-el.lookupResult.style.whiteSpace = 'pre-line';
+  el.lookupResult.textContent = msg;
+  el.lookupResult.style.whiteSpace = 'pre-line';
 }
 
 function clearApp() {
@@ -238,7 +244,6 @@ function clearApp() {
 }
 
 async function loadAssets() {
-  // Load words
   try {
     const res = await fetch(WORDLIST_FILE);
     const text = await res.text();
@@ -247,7 +252,6 @@ async function loadAssets() {
     state.words = [];
   }
 
-  // Load image
   const img = new Image();
   img.src = PLATE_IMAGE_FILE;
   img.onload = () => {
