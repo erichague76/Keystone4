@@ -101,6 +101,7 @@ function lookupPlate() {
   const letters = normalizeWord(el.lookupInput.value);
   if (letters.length !== 3) {
     el.lookupResult.textContent = "Enter exactly 3 letters.";
+    el.status.textContent = '';
     return;
   }
 
@@ -124,8 +125,7 @@ function lookupPlate() {
 
   el.lookupResult.textContent = msg;
   el.lookupResult.style.whiteSpace = 'pre-line';
-  el.status.textContent = msg;
-  el.status.style.whiteSpace = 'pre-line';
+  el.status.textContent = '';
 
   state.letters = letters.toUpperCase();
   renderPlateWithLetters(state.letters);
@@ -220,11 +220,9 @@ function generateLetters() {
     `Total words: ${total}`
   ].join('\n');
 
-  el.status.textContent = msg;
-  el.status.style.whiteSpace = 'pre-line';
-
   el.lookupResult.textContent = msg;
   el.lookupResult.style.whiteSpace = 'pre-line';
+  el.status.textContent = '';
 }
 
 function clearApp() {
