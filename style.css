@@ -135,7 +135,8 @@ h1 {
   margin-top: 4px;
 }
 
-.input-panel {
+.input-panel,
+.lookup-panel {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -347,7 +348,8 @@ input:focus {
     flex-direction: column;
   }
 
-  .input-panel {
+  .input-panel,
+  .lookup-panel {
     padding: 12px 14px;
   }
 
